@@ -1,13 +1,13 @@
 {
-  "name": "backend",
+  "name": "datadrop-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "it is a server server file for datadrop file sharing system",
   "main": "index.js",
   "scripts": {
     "node": "node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["node","express","jwt","MongoDB","file sharing"],
+  "author": "yogesh bidave",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
