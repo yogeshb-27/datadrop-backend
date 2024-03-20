@@ -58,4 +58,28 @@ const sendResetPasswordEmail = async (email, resetToken) => {
   }
 };
 
-module.exports = { sendNodeMail, sendResetPasswordEmail };
+const sendPasswordChangedEmail = async (email) => {
+  const mailOptions = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: "Password Changed Successfully",
+    html: `<p>Hello,</p>
+    <p>Your password has been successfully changed.</p>
+    <p>If you did not make this change, please contact support immediately.</p>
+    <p>Thank you,</p>
+    <p>DataDrop</p>`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Error sending password changed email:", error);
+    throw error;
+  }
+};
+
+module.exports = {
+  sendNodeMail,
+  sendResetPasswordEmail,
+  sendPasswordChangedEmail,
+};

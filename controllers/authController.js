@@ -2,7 +2,10 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const { sendResetPasswordEmail } = require("../utils/sendMail");
+const {
+  sendResetPasswordEmail,
+  sendPasswordChangedEmail,
+} = require("../utils/sendMail");
 
 // Register a new user
 const register = async (req, res) => {
@@ -82,6 +85,8 @@ const resetPassword = async (req, res) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
     await user.save();
+
+    await sendPasswordChangedEmail(user.email);
 
     res.status(200).json({ message: "Password reset successfully" });
   } catch (error) {
